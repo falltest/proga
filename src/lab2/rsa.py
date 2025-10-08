@@ -35,13 +35,19 @@ def gcd(a: int, b: int) -> int:
 
 def multiplicative_inverse(e: int, phi: int) -> int:
     """
-    Euclid's extended algorithm for finding the multiplicative
-    inverse of two numbers.
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
-    pass
+    def extended_gcd(a: int, b: int):
+        if b == 0:
+            return (a, 1, 0)
+        g, x1, y1 = extended_gcd(b, a % b)
+        return (g, y1, x1 - (a // b) * y1)
+
+    g, x, _ = extended_gcd(e, phi)
+    if g != 1:
+        raise ValueError("Обратного элемента не существует")
+    return x % phi
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
