@@ -12,9 +12,12 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     while len(keyword) < len(plaintext):
         keyword *= 2
     keyword = keyword[:len(plaintext)]
-
+    bukv = set('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM')
     for i, c in enumerate(plaintext):
         k = keyword[i]
+        if c not in bukv:
+            ciphertext += c
+            continue
         if c.isupper():
             shift = ord(k.upper()) - ord('A')
             idx = (ord(c) - ord('A') + shift) % 26
@@ -55,3 +58,5 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         else:
             plaintext += c
     return plaintext
+
+print(encrypt_vigenere("Hello123!", "key"))

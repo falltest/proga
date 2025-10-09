@@ -48,10 +48,9 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    cifr = set('1234567890')
     bukv = set('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM')
     for c in ciphertext:
-        if c in cifr or c not in bukv:
+        if c not in bukv:
             plaintext += c
             continue
         new_ind = ord(c) - shift
